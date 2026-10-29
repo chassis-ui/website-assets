@@ -7,17 +7,25 @@ chassis-ui/assets, where the assets were kept until 2026-10-29 (D37). Read on 20
 
 ## For the maintainer
 
-- **The first release.** The version is 0.1.0, a new sequence: the assets were released as
-  0.5.0 of chassis-ui/assets last. A release is a tag, `v<version>`, and the archives are
-  named `chassis-website-assets-<platform>-<app>-<brand>-<version>.zip`, where sinefil.org
-  read `chassis-assets-web-docs-sinefil-<version>.zip`: sinefil.org takes the new name from
-  the first release. The CI of this repository installs `@chassis-ui/assets` from npm, so it
-  passes once 0.6.0 is published.
-- **`chassis-docs vendor` of `@chassis-ui/docs`.** When a site subsets fonts, it installs
-  the submodule with `pnpm install --filter @chassis-ui/assets --prod`, a filter of the old
-  workspace. Here the build is a dependency, so `pnpm install --prod` is enough, and the
-  filter matches no project. A report for chassis-website, due when the sites move their
-  submodule to this repository.
+- **The consumers move to the releases.** Since 0.2.0, a release is built with
+  `pnpm build:release`: images optimized, and the web fonts subsetted to `latin`,
+  `latin-ext`, `symbols2` and `U+2190-2193`, the union of the ranges the Chassis sites set,
+  and split by range. The Chassis sites take the archive of `web/docs/chassis` of a pinned
+  release in place of the `vendor/assets` submodule that `chassis-docs vendor` builds, and
+  sinefil.org takes the archive of `web/docs/sinefil` from here in place of 0.5.0 of
+  chassis-ui/assets. Tracked in chassis-ui/website#33, which adds the release-based vendor
+  to `@chassis-ui/docs` and blocks chassis-ui/css#87, chassis-ui/icons#19,
+  chassis-ui/figma#14, chassis-ui/react#125 and chassis-ui/tokens#30, and in
+  ozgurgunes/sinefil-web#222. Decided on 2026-10-29.
+- **The ranges are one list for both brands.** `chassis.subset.ranges` applies to every font
+  of a web job, so a `sinefil` font loses its Cyrillic and Greek glyphs, and a film title in
+  those scripts falls back to another font on sinefil.org and in its link-preview images.
+  Adding `cyrillic` and `greek` costs a page nothing with the split. Left as it is until
+  the maintainer decides.
+- **The `symbols2` files without a glyph.** The split writes a `symbols2` file for the fonts
+  that hold only its spaces, with an empty `glyf` table, which Chrome rejects; no page asks
+  for one while its text has no box drawing character. The build is to leave such a file
+  out: "Not written" in `ref/OPEN.md` of chassis-ui/assets.
 - **The weights of the `display` role of the `chassis` brand.** Its Montserrat files, taken
   from `feat/new-chassis-brand` on 2026-10-19, are at 300, 400, 600 and 700, the weights of
   the `ui` role, while `typography.fontWeight.display` of `source/brand-chassis/brand-base.json`

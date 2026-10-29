@@ -40,9 +40,17 @@ pnpm install
 
 ## Releases
 
-A release is a tag: `git tag v0.1.0 && git push origin v0.1.0`, with the version of
-`package.json`. The release workflow builds and verifies every job, and attaches one
-`<name>-<platform>-<app>-<brand>-<version>.zip` per job to the GitHub release.
+A release is a tag: `git tag v<version> && git push origin v<version>`, with the version of
+`package.json`. The release workflow builds every job with `pnpm build:release`, verifies it,
+and attaches one `<name>-<platform>-<app>-<brand>-<version>.zip` per job to the GitHub
+release.
+
+`build:release` is `chassis-assets build --optimize --subset`: the images are optimized, and
+the web fonts keep the characters of the ranges of `chassis.subset` only, `latin`,
+`latin-ext`, `symbols2` and the arrows `U+2190-2193`, the union of what the Chassis sites set,
+and are split by range, so a page downloads the file of a range only when it has a character
+of it. A release is what the Chassis sites and sinefil.org serve. `pnpm build` stays the
+plain build, for CI and for work on the assets.
 
 ## The Chassis sites
 

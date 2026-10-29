@@ -54,8 +54,10 @@ jobs:
       - name: Lint source
         run: pnpm lint
 
+      # The build of a release: images optimized, and the web fonts subsetted to the ranges of
+      # chassis.subset and split by range, as the Chassis sites and sinefil.org serve them
       - name: Build
-        run: pnpm build
+        run: pnpm build:release
 
       - name: Verify
         run: pnpm verify

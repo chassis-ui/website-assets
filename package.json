@@ -1,6 +1,6 @@
 {
   "name": "chassis-website-assets",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "The assets of the Chassis websites and apps: the chassis and sinefil brands, the docs and demo apps, built with @chassis-ui/assets",
   "chassis": {
@@ -23,15 +23,23 @@
       }
     },
     "subset": {
+      "ranges": [
+        "latin",
+        "latin-ext",
+        "symbols2",
+        "U+2190-2193"
+      ],
       "axes": {
         "chassis": {
           "opsz": 14
         }
-      }
+      },
+      "split": true
     }
   },
   "scripts": {
     "build": "chassis-assets build",
+    "build:release": "chassis-assets build --optimize --subset",
     "lint": "chassis-assets lint-source",
     "verify": "chassis-assets verify",
     "archive": "chassis-assets archive",
@@ -50,5 +58,9 @@
   "dependencies": {
     "@chassis-ui/assets": "^0.6.0",
     "subset-font": "^2.9.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5",
+    "svgo": "^4.1.0"
   }
 }
