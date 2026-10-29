@@ -1,6 +1,6 @@
 {
   "name": "chassis-website-assets",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "The assets of the Chassis websites and apps: the chassis and sinefil brands, the docs and demo apps, built with @chassis-ui/assets",
   "chassis": {
@@ -26,6 +26,8 @@
       "ranges": [
         "latin",
         "latin-ext",
+        "cyrillic",
+        "greek",
         "symbols2",
         "U+2190-2193"
       ],
