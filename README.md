@@ -65,3 +65,29 @@ takes the archive of its job from a release instead.
 
 The [documentation of Chassis Assets](https://chassis-ui.com/assets/) describes each asset
 type, the rules of each platform and how a project uses the output.
+
+## Known oddities
+
+Kept on purpose until the maintainer says otherwise. Do not fix one without a release note
+that says what breaks.
+
+- Eight screenshots under `images/figma/` carry a Figma export number after the resolution
+  indicator, `card-orientation-top-2x-1.png`. The web build wrote that name from
+  `card-orientation-top@2x-1.png`, and the sources were renamed to the output names on
+  2026-09-30, so `chassis-figma` keeps reading them. They are not `@2x` files to the build.
+- Eight screenshots under `images/figma/components/` are Figma export copies of another
+  screenshot, `card-orientation-top-1.png` and `card-orientation-top-2x-1.png` beside
+  `card-orientation-top.png`, in both modes and without `@2x`. No page of `chassis-figma`
+  reads them. The contract check requires both modes for them, and not the `@2x`: they are
+  the `except` patterns of the screenshot set in `chassis.checks.json`.
+- `source/_default/demo/icons/icons/chassis-icons.min.css` breaks the naming rules;
+  `pnpm lint` warns about it (`lint.allow` of `chassis.checks.json`).
+- The copy of `@chassis-ui/icons` under `icons/icons/` and `icons/svgs/` of
+  `source/_default/demo/` is the build output of `@chassis-ui/icons`, made by hand, so it is
+  as new as its last refresh: 0.3.1, on 2026-10-01. Refresh it by the steps of "Refreshing
+  the icons" in `docs/architecture.md` of chassis-ui/assets; do not edit it.
+
+## Fonts
+
+[docs/fonts.md](docs/fonts.md) lists the font files a brand holds and the steps that prepare
+them, with `build/instance-font.py`, the instancer of a variable font.
