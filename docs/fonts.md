@@ -2,13 +2,15 @@
 
 How the font files of a brand are made and placed in `source/`: for a new brand, a new family
 of a role, or a new version of a family. The names and the formats are the rules of the
-[fonts page](../packages/site/content/docs/asset-types/fonts.mdx); this document is the
-procedure behind the files. Decision D24 of [decisions.md](decisions.md) has the
-reasons.
+[fonts page](https://chassis-ui.com/assets/docs/asset-types/fonts/); this document is the
+procedure behind the files. Decision D24 of the
+[decisions of chassis-ui/assets](https://github.com/chassis-ui/assets/blob/develop/docs/decisions.md)
+has the reasons, and the D-numbers below are its own.
 
 The build copies fonts and converts nothing by default, so every file the output needs is a
-file of `source/`, prepared once by hand. `build/instance-font.py` is the one script of the
-procedure, and no part of the build.
+file of `source/`, prepared once by hand. `chassis-assets static-font` writes the files
+by weight of a variable font, as step 4 says; it is a command of the package and no part of
+the build.
 
 ## What a brand holds
 
@@ -96,8 +98,10 @@ Where the files come from:
   it at 14 for the `chassis` brand, by `axes` of `chassis.subset` in `package.json`. Geist and
   Lora have a weight axis only. Decision D25.
 - The files by weight of `chassis` are written from their variable files, by step 4
-  with fonttools 4.66.1, on 2026-10-11, each at the weight of its role, those of Montserrat
-  on 2026-10-15, and those of Geist on 2026-10-20. Decision D28.
+  with fonttools 4.66.1 and the script that `chassis-assets static-font` replaced, on
+  2026-10-11, each at the weight of its role, those of Montserrat on 2026-10-15, and those
+  of Geist on 2026-10-20. Decision D28. The command writes the same names, glyphs and
+  weights (D40).
 - The files by weight of `chassis` are at the default of every other axis. For Inter
   that is the optical size 14, the cut that `--subset` fixes for the web, so a page and an
   app show the same cut. An iOS app loads the files as `Inter-Regular`,
@@ -172,28 +176,22 @@ and each italic beside it, as `Lora-MediumItalic.ttf` to `prose-elegant-italic.t
 ### 4. Write the files by weight
 
 For a family with a variable font and no reserved name, write each file by weight from the
-variable file of its style, with `build/instance-font.py`. The script needs the package fonttools, in a Python
-environment of its own:
-
-```shell
-python3 -m venv .cache/fonttools
-.cache/fonttools/bin/pip install fonttools==4.66.1
-```
-
-Give it the variable file, the file to write and the weight the tokens give the name. For
+variable file of its style, with `chassis-assets static-font` of `@chassis-ui/assets`, which
+`pnpm install` brings with the package `subset-font` it needs. Give it the variable file, the
+files to write, a `.ttf` and a `.woff2`, and the weight the tokens give the name. For
 `ui-strong` of a role whose `strong` is 600:
 
 ```shell
 docs=source/<brand>/docs/fonts
 shared=source/<brand>/_shared/fonts
-.cache/fonttools/bin/python build/instance-font.py $docs/ui.ttf $shared/ui-strong.ttf wght=600
-.cache/fonttools/bin/python build/instance-font.py $docs/ui-italic.ttf $shared/ui-strong-italic.ttf wght=600
+npx chassis-assets static-font $docs/ui.ttf $shared/ui-strong.ttf $shared/ui-strong.woff2 wght=600
+npx chassis-assets static-font $docs/ui-italic.ttf $shared/ui-strong-italic.ttf $shared/ui-strong-italic.woff2 wght=600
 ```
 
-The script writes the font as it is at that weight, without an axis, and prints the names it
-gave it: `Inter SemiBold Italic`, with the PostScript name `Inter-SemiBoldItalic`. The file
-keeps every glyph, every character and every layout feature of the variable font. The same
-command on the same file gives the same bytes.
+The command writes the font as it is at that weight, without an axis, to each file, and
+prints the names it gave it: `Inter SemiBold Italic`, with the PostScript name
+`Inter-SemiBoldItalic`. The file keeps every glyph, every character and every layout feature
+of the variable font. The same command on the same file gives the same bytes.
 
 An axis that is not named is fixed at its default. Name the optical size too, as
 `wght=600 opsz=18`, when its default is not the cut the brand shows; take the value that
@@ -210,24 +208,23 @@ On a Mac, the names inside a file say which font it is:
 mdimport -t -d2 source/sinefil/_shared/fonts/ui-strong.ttf 2>&1 | grep -A 2 -E 'name_(family|postscript)'
 ```
 
-### 5. Write the WOFF2 files
+### 5. Write the other WOFF2 files
 
-Write a `.woff2` beside each `.ttf`, with the WOFF2 encoder of Google as a package, in
-`source/<brand>/_shared/fonts/`:
+Step 4 writes the `.woff2` of each file by weight. Write a `.woff2` beside each other `.ttf`,
+the variable files of `source/<brand>/docs/fonts/` and the files by weight of a download,
+with the WOFF2 encoder of Google as a package:
 
 ```shell
-cd source/<brand>/_shared/fonts
+cd source/<brand>/docs/fonts
 for f in <role>*.ttf; do
   pnpm --package=wawoff2@2.0.1 dlx woff2_compress.js "$f" "${f%.ttf}.woff2"
 done
 ```
 
-and in the same way in `source/<brand>/docs/fonts/`, for the variable files.
-
 The conversion keeps every character, every layout feature and the axes of a variable font.
 The same command on the same file gives the same bytes. Do not subset here, and fix no axis
 of a variable file: a file of `source/` has every character of its family, and
-`pnpm assets --subset` writes the smaller files of a build.
+`pnpm build:release` writes the smaller files of a release.
 
 ### 6. Write the stylesheet
 
@@ -305,8 +302,8 @@ files of `prose` of `sinefil`; the third prints nothing.
 Run the checks of a change to `source/`:
 
 ```shell
-pnpm assets:lint:source
-pnpm assets && pnpm assets:verify
+pnpm lint
+pnpm build && pnpm verify
 ```
 
 The lint opens each font that a stylesheet declares, and fails when the rule names another

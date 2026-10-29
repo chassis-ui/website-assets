@@ -58,7 +58,7 @@
   "author": "Ozgur Gunes <o.gunes@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@chassis-ui/assets": "^0.6.0",
+    "@chassis-ui/assets": "^0.7.0",
     "subset-font": "^2.9.0"
   },
   "devDependencies": {

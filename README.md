@@ -27,8 +27,8 @@ git lfs install
 pnpm install
 ```
 
-| Command           | What it does                                                                |
-| ----------------- | --------------------------------------------------------------------------- |
+| Command        | What it does                                                                |
+| -------------- | --------------------------------------------------------------------------- |
 | `pnpm build`   | Builds every brand, app and platform into `dist/`                           |
 | `pnpm lint`    | Checks the names and the layout of `source/`                                |
 | `pnpm verify`  | Checks an existing `dist/` against `source/` and `chassis.checks.json`      |
@@ -98,4 +98,4 @@ that says what breaks.
 ## Fonts
 
 [docs/fonts.md](docs/fonts.md) lists the font files a brand holds and the steps that prepare
-them, with `build/instance-font.py`, the instancer of a variable font.
+them, with `chassis-assets static-font` for the files by weight of a variable font.

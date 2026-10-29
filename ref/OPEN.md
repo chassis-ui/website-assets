@@ -73,7 +73,6 @@ chassis-ui/assets, where the assets were kept until 2026-10-29 (D37). Read on 20
 - An entry of `contracts` in `chassis.checks.json` for `fonts/fonts.css`. The sites link the
   stylesheets of `fonts/` from `@chassis-ui/docs` 0.8.0 on, so the entry is due: no check
   fails when it is missing.
-- A test of `build/instance-font.py`. It is Python, and the repository has no runner for it.
 
 ## Parked
 
