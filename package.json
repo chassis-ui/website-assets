@@ -1,0 +1,54 @@
+{
+  "name": "chassis-website-assets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The assets of the Chassis websites and apps: the chassis and sinefil brands, the docs and demo apps, built with @chassis-ui/assets",
+  "chassis": {
+    "defaults": {
+      "brandFolder": "_default"
+    },
+    "build": {
+      "brands": [
+        "chassis",
+        "sinefil"
+      ],
+      "apps": {
+        "docs": [
+          "web"
+        ],
+        "demo": [
+          "ios",
+          "android"
+        ]
+      }
+    },
+    "subset": {
+      "axes": {
+        "chassis": {
+          "opsz": 14
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "chassis-assets build",
+    "lint": "chassis-assets lint-source",
+    "verify": "chassis-assets verify",
+    "archive": "chassis-assets archive",
+    "analyze": "chassis-assets analyze",
+    "assets:site": "chassis-assets build --clean --brand chassis --app docs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chassis-ui/website-assets.git"
+  },
+  "author": "Ozgur Gunes <o.gunes@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@chassis-ui/assets": "^0.6.0",
+    "subset-font": "^2.9.0"
+  }
+}
