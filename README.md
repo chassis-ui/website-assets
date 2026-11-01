@@ -40,10 +40,10 @@ pnpm install
 
 ## Releases
 
-A release is a tag: `git tag v<version> && git push origin v<version>`, with the version of
-`package.json`. The release workflow builds every job with `pnpm build:release`, verifies it,
-and attaches one `<name>-<platform>-<app>-<brand>-<version>.zip` per job to the GitHub
-release.
+A release is a push to `main` with a new version in `package.json`, without a tag of its own.
+The release workflow builds every job with `pnpm build:release`, verifies it, creates the tag
+`v<version>`, and attaches one `<name>-<platform>-<app>-<brand>-<version>.zip` per job to the
+GitHub release. A push whose version has a tag releases nothing.
 
 `build:release` is `chassis-assets build --optimize --subset --asset-catalog --icon-catalog`: the
 iOS archives hold the asset catalogs `Assets.xcassets` and `Icons.xcassets`, the images are optimized, and
