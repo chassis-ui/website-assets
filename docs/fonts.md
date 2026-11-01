@@ -33,8 +33,8 @@ The web app, `docs`, takes for each role that has a family of its own:
 and one `fonts.css`, which declares every family of the brand: the variable files of a role,
 or the files by weight of a family without one. A role that the tokens of the brand set in
 the family of another role, as `prose` is set in `ui` for `chassis` and `display` in `prose`
-for `sinefil`, has no files: the files of a family are under the role that owns it,
-and the stylesheet declares the family once. Which roles have files so differs by brand (D31).
+for `sinefil`, has no files in this app: the files of a family are under the role that owns
+it, and the stylesheet declares the family once (D31).
 The variable files and `fonts.css` are in `source/<brand>/docs/fonts/`; the files by weight,
 their `.ttf` files and the licenses, which the other app takes too, are in
 `source/<brand>/_shared/fonts/`.
@@ -46,7 +46,11 @@ written from the `.ttf` beside it, by step 5.
 
 The iOS and Android app, `demo`, takes the files by weight only, as `.ttf` and `.woff2`, and
 the licenses, from `source/<brand>/_shared/fonts/`, with a `fonts.css` of its own in
-`source/<brand>/demo/fonts/` that declares the files by weight. It has no variable file.
+`source/<brand>/demo/fonts/` that declares the files by weight. It has no variable file. An
+app names a font by its file, so `demo` has a file for every role and weight in every brand
+(D41): the `.ttf` files of a role set in the family of another role, with its license, are
+in `source/<brand>/demo/fonts/`, copies of the files of that family at the weights of the
+role. The stylesheet declares the family once, and does not name them.
 
 Three rules keep the brands in step:
 
@@ -74,16 +78,19 @@ file by weight, which is the weight of its token.
 | Brand     | Role      | Family     | Variable           | elegant | normal | strong | mass |
 | --------- | --------- | ---------- | ------------------ | ------- | ------ | ------ | ---- |
 | `chassis` | `ui`      | Inter      | Upright and italic | 300     | 400    | 600    | 700  |
-| `chassis` | `display` | Montserrat | Upright and italic | 300     | 400    | 600    | 700  |
+| `chassis` | `prose`   | Inter      | The files of `ui`  | 300     | 400    | 600    | 700  |
+| `chassis` | `display` | Montserrat | Upright and italic | 400     | 500    | 600    | 700  |
 | `chassis` | `code`    | Fira Code  | Upright            |         | 400    | 700    |      |
 | `sinefil` | `ui`      | Geist      | Upright and italic | 300     | 400    | 600    | 700  |
 | `sinefil` | `prose`   | Lora       | Upright and italic | 500     | 400    | 600    | 700  |
+| `sinefil` | `display` | Lora       | The files of `prose` | 400   | 500    | 600    | 700  |
 | `sinefil` | `code`    | Cousine    | None               |         | 400    | 700    |      |
 
 Every role with files has an italic of every weight, except `code`. The `prose` role of
 `chassis` is set in its `ui` family, and the `display` role of `sinefil` in its `prose`
-family, so neither has files of its own. The `display` role of `sinefil` takes the Lora files
-at elegant 400, normal 500, strong 600 and mass 700. Lora has no weight under 400, so the
+family, so their files are in `demo` only, and are copies. The `display` files of `sinefil`
+are the Lora files at elegant 400, normal 500, strong 600 and mass 700, so `display-elegant`
+is a copy of `prose-normal` and `display-normal` of `prose-elegant`. Lora has no weight under 400, so the
 `elegant` of its `prose` role is the Medium.
 
 Where the files come from:
@@ -105,7 +112,7 @@ Where the files come from:
 - The files by weight of `chassis` are at the default of every other axis. For Inter
   that is the optical size 14, the cut that `--subset` fixes for the web, so a page and an
   app show the same cut. An iOS app loads the files as `Inter-Regular`,
-  `Montserrat-Regular` and `FiraCode-Bold`.
+  `Montserrat-Medium` and `FiraCode-Bold`.
 - The files by weight of Lora are the files in `static/` of its download, copied under the
   names of their roles, since its license reserves the name "Lora" (D32). An iOS app loads
   the fonts of `sinefil` as `Geist-Regular`, `Lora-Regular` and `Cousine-Bold`.
@@ -295,7 +302,8 @@ print the files of a role that one of the two brands sets in the family of anoth
 and the variable files of a family that has none. For the `sinefil` brand, the first prints
 the files by weight and the licenses of `display` and of `prose`; the second prints
 `code.ttf`, `code.woff2` and the variable files of `display` of `chassis`, and the variable
-files of `prose` of `sinefil`; the third prints nothing.
+files of `prose` of `sinefil`; the third prints the copies of the role that each brand sets in
+another family.
 
 ### 9. Build and check
 

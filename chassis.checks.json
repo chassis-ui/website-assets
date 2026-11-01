@@ -1,5 +1,23 @@
 {
   "contracts": {
+    "ios/demo/chassis": [
+      {
+        "reader": "the iOS example, chassis-ui/ios-example, which names the fonts by role",
+        "files": [
+          "fonts/{ui,prose,display}_{elegant,normal,strong,mass}{,_italic}.ttf",
+          "fonts/code_{normal,strong}.ttf"
+        ]
+      }
+    ],
+    "ios/demo/sinefil": [
+      {
+        "reader": "the iOS example, chassis-ui/ios-example, which names the fonts by role",
+        "files": [
+          "fonts/{ui,prose,display}_{elegant,normal,strong,mass}{,_italic}.ttf",
+          "fonts/code_{normal,strong}.ttf"
+        ]
+      }
+    ],
     "web/docs/chassis": [
       {
         "reader": "Navigation.astro and Footer.astro of @chassis-ui/docs, which inline it from 0.10 on and fail the build of a site without it",

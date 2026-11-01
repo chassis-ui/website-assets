@@ -45,7 +45,8 @@ A release is a tag: `git tag v<version> && git push origin v<version>`, with the
 and attaches one `<name>-<platform>-<app>-<brand>-<version>.zip` per job to the GitHub
 release.
 
-`build:release` is `chassis-assets build --optimize --subset`: the images are optimized, and
+`build:release` is `chassis-assets build --optimize --subset --asset-catalog --icon-catalog`: the
+iOS archives hold the asset catalogs `Assets.xcassets` and `Icons.xcassets`, the images are optimized, and
 the web fonts keep the characters of the ranges of `chassis.subset` only: `latin`,
 `latin-ext`, `symbols2` and the arrows `U+2190-2193`, the union of what the Chassis sites set,
 and `cyrillic` and `greek` for the film titles of sinefil.org. They are split by range, so a page downloads the file of a range only when it has a character

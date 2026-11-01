@@ -26,12 +26,6 @@ chassis-ui/assets, where the assets were kept until 2026-10-29 (D37). Read on 20
   that hold only its spaces, with an empty `glyf` table, which Chrome rejects; no page asks
   for one while its text has no box drawing character. The build is to leave such a file
   out: "Not written" in `ref/OPEN.md` of chassis-ui/assets.
-- **The weights of the `display` role of the `chassis` brand.** Its Montserrat files, taken
-  from `feat/new-chassis-brand` on 2026-10-19, are at 300, 400, 600 and 700, the weights of
-  the `ui` role, while `typography.fontWeight.display` of `source/brand-chassis/brand-base.json`
-  in chassis-ui/tokens 0.10 is Regular, Medium, SemiBold and Bold, 400, 500, 600 and 700. The
-  files by weight of `elegant` and `normal`, and the comment of `fonts.css`, follow one of the
-  two once the maintainer says which.
 - **The logos that the siblings read by their old names.** D33 renamed the logos to
   `images/logo/logo-{black,dark,light,white}.{png,svg}` of each brand, and removed the
   `chassis-{logo,icon}-*` files. Reports for the siblings: `BrandingSection.astro` of

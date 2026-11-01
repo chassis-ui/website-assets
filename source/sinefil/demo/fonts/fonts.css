@@ -1,6 +1,6 @@
 /* The fonts of the Sinefil brand: the files by weight of each family. */
 /* One @font-face rule per file, under the family name that the typography tokens of the brand name. */
-/* The "display" role is set in the "prose" family and has no files of its own. */
+/* The "display" role is set in the "prose" family: its files in this folder are those of "prose" at the weights of "display", and this stylesheet declares that family once. */
 
 /* Geist, the "ui" family of the Sinefil brand. */
 /* Weights by role: elegant 300, normal 400, strong 600, mass 700. */

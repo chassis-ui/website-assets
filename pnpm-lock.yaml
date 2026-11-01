@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@chassis-ui/assets':
-        specifier: ^0.7.0
-        version: 0.7.0(sharp@0.35.5)(subset-font@2.9.0)(svgo@4.1.0)
+        specifier: ^0.8.0
+        version: 0.8.0(sharp@0.35.5)(subset-font@2.9.0)(svgo@4.1.0)
       subset-font:
         specifier: ^2.9.0
         version: 2.9.0
@@ -24,8 +24,8 @@ importers:
 
 packages:
 
-  '@chassis-ui/assets@0.7.0':
-    resolution: {integrity: sha512-y0sNqo7bsm9EIJ13tR9Z7QnJiFP4P2OyTVCbwVzfBSm0aKVPUV8+gljdeoHy0ytm7guFITX8ORpjdoOT4IUb4w==}
+  '@chassis-ui/assets@0.8.0':
+    resolution: {integrity: sha512-xcffStt3mh4GPAJwynIGcIAEp2dPaVCVSPgnCqSIeLGZyXG1JUNrcwiTih1JAfUaGEDiwhrNMycj/4DiTaxdCw==}
     engines: {node: '>=22.12.0'}
     hasBin: true
     peerDependencies:
@@ -329,7 +329,7 @@ packages:
 
 snapshots:
 
-  '@chassis-ui/assets@0.7.0(sharp@0.35.5)(subset-font@2.9.0)(svgo@4.1.0)':
+  '@chassis-ui/assets@0.8.0(sharp@0.35.5)(subset-font@2.9.0)(svgo@4.1.0)':
     optionalDependencies:
       sharp: 0.35.5
       subset-font: 2.9.0
