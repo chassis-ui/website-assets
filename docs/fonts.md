@@ -352,5 +352,5 @@ ships, and two more:
   optical size, add the brand and the value to `axes` of `chassis.subset` in `package.json`.
   A build with `--subset` fixes it.
 
-The tokens of the brand are in chassis-tokens, and a site or an app builds with the brand of
+The tokens of the brand are in chassis-ui/tokens, and a site or an app builds with the brand of
 the same name in both repositories.

@@ -1,8 +1,8 @@
-# chassis-website-assets
+# chassis-ui/website-assets
 
-The assets of chassis-website-assets: fonts, images, icons and other design files, by brand and app, built
-with [`@chassis-ui/assets`](https://www.npmjs.com/package/@chassis-ui/assets) into the names
-and the formats of the web, iOS and Android.
+The assets of this repository: fonts, images, icons and other design files, by brand and app,
+built with [`@chassis-ui/assets`](https://www.npmjs.com/package/@chassis-ui/assets) into the
+names and the formats of the web, iOS and Android.
 
 ## Layout
 
@@ -82,10 +82,10 @@ that says what breaks.
 - Eight screenshots under `images/figma/` carry a Figma export number after the resolution
   indicator, `card-orientation-top-2x-1.png`. The web build wrote that name from
   `card-orientation-top@2x-1.png`, and the sources were renamed to the output names on
-  2026-09-30, so `chassis-figma` keeps reading them. They are not `@2x` files to the build.
+  2026-09-30, so chassis-ui/figma keeps reading them. They are not `@2x` files to the build.
 - Eight screenshots under `images/figma/components/` are Figma export copies of another
   screenshot, `card-orientation-top-1.png` and `card-orientation-top-2x-1.png` beside
-  `card-orientation-top.png`, in both modes and without `@2x`. No page of `chassis-figma`
+  `card-orientation-top.png`, in both modes and without `@2x`. No page of chassis-ui/figma
   reads them. The contract check requires both modes for them, and not the `@2x`: they are
   the `except` patterns of the screenshot set in `chassis.checks.json`.
 - `source/_default/demo/icons/icons/chassis-icons.min.css` breaks the naming rules;

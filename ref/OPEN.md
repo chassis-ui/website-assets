@@ -29,17 +29,17 @@ chassis-ui/assets, where the assets were kept until 2026-10-29 (D37). Read on 20
 - **The weights of the `display` role of the `chassis` brand.** Its Montserrat files, taken
   from `feat/new-chassis-brand` on 2026-10-19, are at 300, 400, 600 and 700, the weights of
   the `ui` role, while `typography.fontWeight.display` of `source/brand-chassis/brand-base.json`
-  in chassis-tokens 0.10 is Regular, Medium, SemiBold and Bold, 400, 500, 600 and 700. The
+  in chassis-ui/tokens 0.10 is Regular, Medium, SemiBold and Bold, 400, 500, 600 and 700. The
   files by weight of `elegant` and `normal`, and the comment of `fonts.css`, follow one of the
   two once the maintainer says which.
 - **The logos that the siblings read by their old names.** D33 renamed the logos to
   `images/logo/logo-{black,dark,light,white}.{png,svg}` of each brand, and removed the
   `chassis-{logo,icon}-*` files. Reports for the siblings: `BrandingSection.astro` of
-  chassis-website reads `images/logo/chassis-{logo,icon}-{brand,white}-banner.svg` from
+  chassis-ui/website reads `images/logo/chassis-{logo,icon}-{brand,white}-banner.svg` from
   `/static/`, and the table of `packages/docs/README.md` there names them; the pages of
-  chassis-css load `images/logo/chassis-logo-brand.svg` with `getStaticPath()` in
+  chassis-ui/css load `images/logo/chassis-logo-brand.svg` with `getStaticPath()` in
   `components/navbar.mdx`, and `about/brand.mdx` loads `chassis-logo-{brand,black,white}.svg`;
-  the README of chassis-react shows `https://chassis-ui.com/static/images/logo/chassis-logo-brand.svg`,
+  the README of chassis-ui/react shows `https://chassis-ui.com/static/images/logo/chassis-logo-brand.svg`,
   which stops working when the website deploys this version. The entry of `contracts` in
   `chassis.checks.json` for the website's logos was removed with D33: add the names the
   website reads once it reads the new ones.
@@ -55,8 +55,8 @@ chassis-ui/assets, where the assets were kept until 2026-10-29 (D37). Read on 20
   D28 chose the family, and `docs/fonts.md` names its other line metrics, not the width. To
   keep the old width, a `size-adjust` of 97.5% in `fonts.css` or the 5.002 files would do
   it, and both change `source/`. "From 0.7 to 0.8" of `UPGRADING.md` of `@chassis-ui/docs`
-  says that text keeps its width, which holds for Inter only: a report for chassis-website.
-- **The icons of the next `@chassis-ui/icons`.** `chassis-icons` removed `road-outline-1.svg`
+  says that text keeps its width, which holds for Inter only: a report for chassis-ui/website.
+- **The icons of the next `@chassis-ui/icons`.** chassis-ui/icons removed `road-outline-1.svg`
   and `road-solid-1.svg` from its source, export copies of the two icons without the number,
   and its version is `0.4.0-next.0`. The copy in `source/_default/demo/` is the output of 0.3.1
   and has both. A refresh, by the steps of "Refreshing the icons" in `docs/architecture.md`
