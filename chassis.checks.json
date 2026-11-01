@@ -1,20 +1,52 @@
 {
   "contracts": {
+    "android/demo/chassis": [
+      {
+        "reader": "the Android example, chassis-ui/android-example, which names the fonts by role, the logo and the app icon",
+        "files": [
+          "res/font/{ui,prose,display}_{elegant,normal,strong,mass}{,_italic}.ttf",
+          "res/font/code_{normal,strong}.ttf",
+          "res/drawable-nodpi/logo.png",
+          "res/drawable-night-nodpi/logo.png",
+          "res/drawable/ic_{arrow_left_solid,arrow_right_from_bracket_solid,bell_solid,check_solid,chevron_right_solid,cube_solid,envelope_outline,envelope_solid,eye_outline,eye_slash_outline,filter_solid,globe_solid,grid_solid,heart_outline,heart_solid,home_solid,info_solid,lock_solid,moon_solid,palette_solid,paper_plane_solid,search_solid,sparkles_solid,star_solid,swatchbook_solid,trash_solid,user_solid,xmark_solid}.xml",
+          "res/drawable{,-xhdpi,-night,-night-xhdpi}/{figma_library,figma_tokens,figma_docs,comp_gallery}.png",
+          "res/drawable{,-xhdpi}/{lego_chassis,platforms}.png",
+          "res/mipmap-anydpi-v26/app_icon.xml"
+        ]
+      }
+    ],
+    "android/demo/sinefil": [
+      {
+        "reader": "the Android example, chassis-ui/android-example, which names the fonts by role, the logo and the app icon",
+        "files": [
+          "res/font/{ui,prose,display}_{elegant,normal,strong,mass}{,_italic}.ttf",
+          "res/font/code_{normal,strong}.ttf",
+          "res/drawable-nodpi/logo.png",
+          "res/drawable-night-nodpi/logo.png",
+          "res/drawable/ic_{arrow_left_solid,arrow_right_from_bracket_solid,bell_solid,check_solid,chevron_right_solid,cube_solid,envelope_outline,envelope_solid,eye_outline,eye_slash_outline,filter_solid,globe_solid,grid_solid,heart_outline,heart_solid,home_solid,info_solid,lock_solid,moon_solid,palette_solid,paper_plane_solid,search_solid,sparkles_solid,star_solid,swatchbook_solid,trash_solid,user_solid,xmark_solid}.xml",
+          "res/drawable{,-xhdpi,-night,-night-xhdpi}/{figma_library,figma_tokens,figma_docs,comp_gallery}.png",
+          "res/drawable{,-xhdpi}/{lego_chassis,platforms}.png",
+          "res/mipmap-anydpi-v26/app_icon.xml"
+        ]
+      }
+    ],
     "ios/demo/chassis": [
       {
-        "reader": "the iOS example, chassis-ui/ios-example, which names the fonts by role",
+        "reader": "the iOS example, chassis-ui/ios-example, which names the fonts by role and the app icon",
         "files": [
           "fonts/{ui,prose,display}_{elegant,normal,strong,mass}{,_italic}.ttf",
-          "fonts/code_{normal,strong}.ttf"
+          "fonts/code_{normal,strong}.ttf",
+          "app-icon/app_icon.icon/icon.json"
         ]
       }
     ],
     "ios/demo/sinefil": [
       {
-        "reader": "the iOS example, chassis-ui/ios-example, which names the fonts by role",
+        "reader": "the iOS example, chassis-ui/ios-example, which names the fonts by role and the app icon",
         "files": [
           "fonts/{ui,prose,display}_{elegant,normal,strong,mass}{,_italic}.ttf",
-          "fonts/code_{normal,strong}.ttf"
+          "fonts/code_{normal,strong}.ttf",
+          "app-icon/app_icon.icon/icon.json"
         ]
       }
     ],

@@ -45,13 +45,27 @@ The release workflow builds every job with `pnpm build:release`, verifies it, cr
 `v<version>`, and attaches one `<name>-<platform>-<app>-<brand>-<version>.zip` per job to the
 GitHub release. A push whose version has a tag releases nothing.
 
-`build:release` is `chassis-assets build --optimize --subset --asset-catalog --icon-catalog`: the
-iOS archives hold the asset catalogs `Assets.xcassets` and `Icons.xcassets`, the images are optimized, and
+`build:release` is `chassis-assets build --optimize --subset --asset-catalog --icon-catalog --res --vector-drawables`: the
+iOS archives hold the asset catalogs `Assets.xcassets` and `Icons.xcassets`, the Android archives
+hold a `res/` folder with the vector drawables of the icons and the app icon, the images are optimized, and
 the web fonts keep the characters of the ranges of `chassis.subset` only: `latin`,
 `latin-ext`, `symbols2` and the arrows `U+2190-2193`, the union of what the Chassis sites set,
 and `cyrillic` and `greek` for the film titles of sinefil.org. They are split by range, so a page downloads the file of a range only when it has a character
 of it. A release is what the Chassis sites and sinefil.org serve. `pnpm build` stays the
 plain build, for CI and for work on the assets.
+
+### Release notes
+
+GitHub generates the notes of a release from its commits. A release that changes what a reader
+reads gets a note here, which is also set on its GitHub release.
+
+**0.4.0.** The Android archives change, and the web and iOS archives do not:
+
+- The fonts move from `fonts/` to `res/font/`, under the same names. The licenses stay in `fonts/`.
+- The icons are vector drawables, from `icons/svgs/ic_<name>.svg` to `res/drawable/ic_<name>.xml`.
+- The images are in `res/` without their subfolders, and a pair is one resource. `images/logo/drawable/logo_light.png` and `logo_dark.png` become `res/drawable-nodpi/logo.png` and `res/drawable-night-nodpi/logo.png`, and `images/home/drawable-xhdpi/figma_docs_dark.png` becomes `res/drawable-night-xhdpi/figma_docs.png`. An image of one size is in `res/drawable-nodpi/`.
+- The app icon is new: `res/mipmap-anydpi-v26/app_icon.xml`, of `res/drawable/app_icon_{background,foreground,monochrome}.xml`, from `source/<brand>/demo/app-icon/app-icon.adaptive/`.
+- What `res/` does not take stays where it was: the licenses, the SVG images and logos, and `icons/icons/ic_chassis_icons.svg`, the sprite of the icons.
 
 ## The Chassis sites
 

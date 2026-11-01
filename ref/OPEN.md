@@ -58,9 +58,13 @@ chassis-ui/assets, where the assets were kept until 2026-10-29 (D37). Read on 20
   which is a change of the output.
 - **Files an app cannot use.** The apps get the symbol sprite of the icons, since it is an
   SVG, and logos that exist under one name as PNG and as SVG, which meet in one `res/`
-  folder or one asset catalog. The build copies what the source holds, and the platform
-  pages say what an app does about each. Removing the copies from `source/_default/demo/` is
-  the maintainer's.
+  folder or one asset catalog. In the `res/` of a release the PNG is the resource, and the SVG
+  stays in `images/logo/drawable/` beside the sprite. The build copies what the source holds,
+  and the platform pages say what an app does about each. Removing the copies from
+  `source/_default/demo/` is the maintainer's.
+- **`--webp` in a release.** Left off: `ref/OPEN.md` of chassis-ui/assets has the numbers.
+- **The layers of the Android app icon.** `app-icon.adaptive/` of each brand was drawn from the
+  logomark and the fill of its `.icon` bundle on 2026-11-01, and is the designer's to replace.
 
 ## Not written
 
