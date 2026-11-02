@@ -35,6 +35,7 @@ pnpm install
 | `pnpm archive` | Writes one zip per platform, app and brand of `dist/` to `archives/`        |
 | `pnpm analyze` | Reports the sizes, the types and the duplicates of `source/` and of `dist/` |
 | `pnpm release-notes` | Prints the entry of the version in `CHANGELOG.md`, and fails without one |
+| `npx chassis-assets check-native` | Compiles `dist/` of `pnpm build:release` with Xcode and the Android SDK, as an app does |
 
 `npx chassis-assets build --help` prints the options of the build: a part of the output with
 `--brand`, `--app` and `--platform`, and the conversions that load a package.
@@ -62,7 +63,8 @@ the web fonts keep the characters of the ranges of `chassis.subset` only: `latin
 `latin-ext`, `symbols2` and the arrows `U+2190-2193`, the union of what the Chassis sites set,
 and `cyrillic` and `greek` for the film titles of sinefil.org. They are split by range, so a page downloads the file of a range only when it has a character
 of it. A release is what the Chassis sites and sinefil.org serve. `pnpm build` stays the
-plain build, for CI and for work on the assets.
+plain build, for CI and for work on the assets. The `Native` workflow compiles a build of the release
+with the tools of iOS and Android when the assets change.
 
 [CHANGELOG.md](CHANGELOG.md) lists what each release changes for a reader of its files.
 
