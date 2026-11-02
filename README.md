@@ -34,16 +34,26 @@ pnpm install
 | `pnpm verify`  | Checks an existing `dist/` against `source/` and `chassis.checks.json`      |
 | `pnpm archive` | Writes one zip per platform, app and brand of `dist/` to `archives/`        |
 | `pnpm analyze` | Reports the sizes, the types and the duplicates of `source/` and of `dist/` |
+| `pnpm release-notes` | Prints the entry of the version in `CHANGELOG.md`, and fails without one |
 
 `npx chassis-assets build --help` prints the options of the build: a part of the output with
 `--brand`, `--app` and `--platform`, and the conversions that load a package.
 
 ## Releases
 
-A release is a push to `main` with a new version in `package.json`, without a tag of its own.
-The release workflow builds every job with `pnpm build:release`, verifies it, creates the tag
-`v<version>`, and attaches one `<name>-<platform>-<app>-<brand>-<version>.zip` per job to the
-GitHub release. A push whose version has a tag releases nothing.
+A release is a push to `main` with a new version in `package.json`, without a tag of its own,
+as the workflow makes the tag. For a release:
+
+1. Set the version in `package.json`, and add its entry to `CHANGELOG.md`. To see what the entry
+   has to name, download the manifest of the last release and run `npx chassis-assets diff`
+   against it.
+2. `pnpm lint`, `pnpm build:release` and `pnpm verify`.
+3. Commit all of it, then `git push origin main`.
+
+The release workflow stops when `CHANGELOG.md` has no entry for the version. It builds every job
+with `pnpm build:release`, verifies it, creates the tag `v<version>`, and attaches the manifest and
+one `website-assets-<platform>-<app>-<brand>-<version>.zip` per job to the GitHub release, whose
+body is the entry of the version. A push whose version has a tag releases nothing.
 
 `build:release` is `chassis-assets build --optimize --subset --asset-catalog --icon-catalog --res --vector-drawables`: the
 iOS archives hold the asset catalogs `Assets.xcassets` and `Icons.xcassets`, the Android archives
@@ -54,18 +64,7 @@ and `cyrillic` and `greek` for the film titles of sinefil.org. They are split by
 of it. A release is what the Chassis sites and sinefil.org serve. `pnpm build` stays the
 plain build, for CI and for work on the assets.
 
-### Release notes
-
-GitHub generates the notes of a release from its commits. A release that changes what a reader
-reads gets a note here, which is also set on its GitHub release.
-
-**0.4.0.** The Android archives change, and the web and iOS archives do not:
-
-- The fonts move from `fonts/` to `res/font/`, under the same names. The licenses stay in `fonts/`.
-- The icons are vector drawables, from `icons/svgs/ic_<name>.svg` to `res/drawable/ic_<name>.xml`.
-- The images are in `res/` without their subfolders, and a pair is one resource. `images/logo/drawable/logo_light.png` and `logo_dark.png` become `res/drawable-nodpi/logo.png` and `res/drawable-night-nodpi/logo.png`, and `images/home/drawable-xhdpi/figma_docs_dark.png` becomes `res/drawable-night-xhdpi/figma_docs.png`. An image of one size is in `res/drawable-nodpi/`.
-- The app icon is new: `res/mipmap-anydpi-v26/app_icon.xml`, of `res/drawable/app_icon_{background,foreground,monochrome}.xml`, from `source/<brand>/demo/app-icon/app-icon.adaptive/`.
-- What `res/` does not take stays where it was: the licenses, the SVG images and logos, and `icons/icons/ic_chassis_icons.svg`, the sprite of the icons.
+[CHANGELOG.md](CHANGELOG.md) lists what each release changes for a reader of its files.
 
 ## The Chassis sites
 
@@ -91,7 +90,7 @@ type, the rules of each platform and how a project uses the output.
 
 ## Known oddities
 
-Kept on purpose until the maintainer says otherwise. Do not fix one without a release note
+Kept on purpose until the maintainer says otherwise. Do not fix one without a changelog entry
 that says what breaks.
 
 - Eight screenshots under `images/figma/` carry a Figma export number after the resolution

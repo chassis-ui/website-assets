@@ -1,6 +1,6 @@
 {
-  "name": "chassis-website-assets",
-  "version": "0.4.0",
+  "name": "@chassis-ui/website-assets",
+  "version": "0.5.0",
   "private": true,
   "description": "The assets of the Chassis websites and apps: the chassis and sinefil brands, the docs and demo apps, built with @chassis-ui/assets",
   "chassis": {
@@ -46,6 +46,7 @@
     "verify": "chassis-assets verify",
     "archive": "chassis-assets archive",
     "analyze": "chassis-assets analyze",
+    "release-notes": "chassis-assets release-notes",
     "assets:site": "chassis-assets build --clean --brand chassis --app docs"
   },
   "engines": {
@@ -57,12 +58,10 @@
   },
   "author": "Ozgur Gunes <o.gunes@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "@chassis-ui/assets": "^0.9.0",
-    "subset-font": "^2.9.0"
-  },
   "devDependencies": {
+    "@chassis-ui/assets": "^0.10.0",
     "sharp": "^0.35.5",
+    "subset-font": "^2.9.0",
     "svg2vectordrawable": "^2.9.1",
     "svgo": "^4.1.0"
   }

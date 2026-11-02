@@ -1,7 +1,7 @@
 name: CI
 
-# On a push and on a pull request: the source lint, the build and the verification of its
-# output, with the commands of @chassis-ui/assets. Written by `chassis-assets init`.
+# On a push and on a pull request: the changelog, the source lint, the build and the
+# verification of its output, with the commands of @chassis-ui/assets. Written by `chassis-assets init`.
 on:
   push:
     branches: [main]
@@ -36,6 +36,10 @@ jobs:
 
       - name: Install
         run: pnpm install --frozen-lockfile
+
+      # Fails when the version of package.json has no entry in CHANGELOG.md
+      - name: Check the changelog
+        run: pnpm release-notes
 
       - name: Lint source
         run: pnpm lint

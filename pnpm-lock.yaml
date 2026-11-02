@@ -7,17 +7,16 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@chassis-ui/assets':
-        specifier: ^0.9.0
-        version: 0.9.0(sharp@0.35.5)(subset-font@2.9.0)(svg2vectordrawable@2.9.1)(svgo@4.1.0)
-      subset-font:
-        specifier: ^2.9.0
-        version: 2.9.0
     devDependencies:
+      '@chassis-ui/assets':
+        specifier: ^0.10.0
+        version: 0.10.0(sharp@0.35.5)(subset-font@2.9.0)(svg2vectordrawable@2.9.1)(svgo@4.1.0)
       sharp:
         specifier: ^0.35.5
         version: 0.35.5
+      subset-font:
+        specifier: ^2.9.0
+        version: 2.9.0
       svg2vectordrawable:
         specifier: ^2.9.1
         version: 2.9.1
@@ -27,8 +26,8 @@ importers:
 
 packages:
 
-  '@chassis-ui/assets@0.9.0':
-    resolution: {integrity: sha512-X00H4eD/rh3jmFOZnvzwAJASJpF8hOEBP0lDMblt2Ls1PXTROFlVOjiTh8/b83JI8B59jNVRNrwon9nDJbIihw==}
+  '@chassis-ui/assets@0.10.0':
+    resolution: {integrity: sha512-l3oSEEruHQSwA4V7Tzyzj7DtLRxFF/8Q8yK2qP6SvhBYjq6dNjN2otiqV+7BABvhGjNA6deT7R+i5979tttolw==}
     engines: {node: '>=22.12.0'}
     hasBin: true
     peerDependencies:
@@ -452,7 +451,7 @@ packages:
 
 snapshots:
 
-  '@chassis-ui/assets@0.9.0(sharp@0.35.5)(subset-font@2.9.0)(svg2vectordrawable@2.9.1)(svgo@4.1.0)':
+  '@chassis-ui/assets@0.10.0(sharp@0.35.5)(subset-font@2.9.0)(svg2vectordrawable@2.9.1)(svgo@4.1.0)':
     optionalDependencies:
       sharp: 0.35.5
       subset-font: 2.9.0
