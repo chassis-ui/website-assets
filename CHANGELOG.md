@@ -8,6 +8,22 @@ without an entry is not released.
 The history of the files before 0.1.0 is in the
 [changelog of Chassis Assets](https://github.com/chassis-ui/assets/blob/main/packages/assets/CHANGELOG.md).
 
+## [0.5.1]
+
+The web archive of the `docs` app of `sinefil` changes, and the other archives do not. Needs
+`@chassis-ui/assets` 0.11.1 to build.
+
+### Changed
+
+- The images of the `docs` app of `sinefil` are drawn, where the files were placeholders of a
+  few bytes: in `web/docs/sinefil/images/`, `favicon.svg`, `favicon.png`, `favicon-16x16.png`,
+  `favicon-32x32.png`, `apple-touch-icon.png`, `safari-pinned-tab.png`, `social-image.png`,
+  `android-chrome-192x192.png`, `android-chrome-512x512.png` and
+  `android-chrome-512x512-maskable.png`. The favicon is the logomark of the brand on a gradient of
+  its color. No file is added, removed or renamed.
+- Built with `@chassis-ui/assets` 0.11.1, which changes no file. CI compiles the iOS and Android
+  output of a release with `actool` and `aapt2`.
+
 ## [0.5.0]
 
 ### Changed
