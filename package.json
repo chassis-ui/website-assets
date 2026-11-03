@@ -59,7 +59,7 @@
   "author": "Ozgur Gunes <o.gunes@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@chassis-ui/assets": "^0.11.1",
+    "@chassis-ui/assets": "^0.12.0",
     "sharp": "^0.35.5",
     "subset-font": "^2.9.0",
     "svg2vectordrawable": "^2.9.1",
