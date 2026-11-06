@@ -45,15 +45,16 @@ pnpm install
 A release is a push to `main` with a new version in `package.json`, without a tag of its own,
 as the workflow makes the tag. For a release:
 
-1. Set the version in `package.json`, and add its entry to `CHANGELOG.md`. To see what the entry
-   has to name, download the manifest of the last release and run `npx chassis-assets diff`
-   against it.
+1. On `next`, set the version in `package.json`, and add its entry to `CHANGELOG.md`. To see
+   what the entry has to name, download the manifest of the last release and run
+   `npx chassis-assets diff` against it.
 2. `pnpm lint`, `pnpm build:release` and `pnpm verify`.
-3. Commit all of it on a branch, and merge its pull request into `main`.
+3. Commit all of it on `next`. Merge `next` into `main` with a merge commit, locally or by a
+   pull request, push `main`, which releases it, and fast-forward `next` to `main`.
 
-A prerelease is the same on `next`: a version such as `0.4.0-next.0`, with its own entry in
-`CHANGELOG.md`, merged into `next`, which releases nothing else. `next` is merged into `main` for
-the release, with a merge commit.
+A prerelease is the same on `next` alone: a version such as `0.4.0-next.0`, with its own entry in
+`CHANGELOG.md`, is released by the push to `next`. `next` releases no version without a
+prerelease part.
 
 The release workflow stops when `CHANGELOG.md` has no entry for the version. It builds every job
 with `pnpm build:release`, verifies it, creates the tag `v<version>`, and attaches the manifest and
