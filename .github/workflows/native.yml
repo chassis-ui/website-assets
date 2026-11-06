@@ -5,7 +5,7 @@ name: Native
 # by `chassis-assets init`, with a job per platform of chassis.build.
 on:
   push:
-    branches: [main]
+    branches: [main, next]
     paths:
       - source/**
       - chassis.checks.json

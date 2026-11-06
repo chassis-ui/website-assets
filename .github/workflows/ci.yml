@@ -4,7 +4,7 @@ name: CI
 # verification of its output, with the commands of @chassis-ui/assets. Written by `chassis-assets init`.
 on:
   push:
-    branches: [main]
+    branches: [main, next]
   pull_request:
 
 permissions:

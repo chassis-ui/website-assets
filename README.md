@@ -49,7 +49,11 @@ as the workflow makes the tag. For a release:
    has to name, download the manifest of the last release and run `npx chassis-assets diff`
    against it.
 2. `pnpm lint`, `pnpm build:release` and `pnpm verify`.
-3. Commit all of it, then `git push origin main`.
+3. Commit all of it on a branch, and merge its pull request into `main`.
+
+A prerelease is the same on `next`: a version such as `0.4.0-next.0`, with its own entry in
+`CHANGELOG.md`, merged into `next`, which releases nothing else. `next` is merged into `main` for
+the release, with a merge commit.
 
 The release workflow stops when `CHANGELOG.md` has no entry for the version. It builds every job
 with `pnpm build:release`, verifies it, creates the tag `v<version>`, and attaches the manifest and

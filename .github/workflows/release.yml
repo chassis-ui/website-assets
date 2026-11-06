@@ -1,14 +1,17 @@
 name: Release
 
-# On a push to main, releases the version in package.json when it has no tag v<version> yet:
+# On a push, releases the version in package.json when it has no tag v<version> yet:
 # builds every brand, app and platform, verifies the output and creates the tag and its GitHub
 # release, whose body is the entry of the version in CHANGELOG.md, with the manifest and one
 # archive per platform, app and brand attached:
 # <name>-<platform>-<app>-<brand>-<version>.zip. A push that does not change the version
 # releases nothing. Written by `chassis-assets init`.
+#
+# next is the prerelease channel: a push to next releases only a version with a prerelease part,
+# such as 0.4.0-next.0, and a version without one waits for main.
 on:
   push:
-    branches: [main]
+    branches: [main, next]
 
 permissions:
   contents: read
@@ -40,6 +43,14 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          # next releases only a prerelease. A version without a prerelease part waits for main
+          if [ "$GITHUB_REF_NAME" = next ] && [ "${VERSION#*-}" = "$VERSION" ]; then
+            echo "release=false" >> "$GITHUB_OUTPUT"
+            echo "$VERSION has no prerelease part: next does not release it, main does"
+            exit 0
+          fi
+
           if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/v$VERSION" --silent 2>/dev/null; then
             echo "release=false" >> "$GITHUB_OUTPUT"
             echo "The tag v$VERSION exists: nothing to release"
