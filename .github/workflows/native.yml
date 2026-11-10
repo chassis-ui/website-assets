@@ -1,8 +1,9 @@
 name: Native
 
 # On a change to the assets: the build of a release, compiled with the tools of each platform, as
-# an app compiles it. A file that the source lint and the build pass can still fail there. Written
-# by `chassis-assets init`, with a job per platform of chassis.build.
+# an app compiles it. A file that the source lint and the build pass can still fail there. One job
+# pulls the Git LFS files and builds, and each platform job compiles its folder of that build, with
+# no Git LFS file. Written by `chassis-assets init`, with a job per platform of chassis.build.
 on:
   push:
     branches: [main, next]
@@ -24,17 +25,38 @@ permissions:
   contents: read
 
 jobs:
-  ios:
-    name: iOS
-    runs-on: macos-26
-    timeout-minutes: 20
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      # Fonts and images are Git LFS files
+      # Fonts and images are Git LFS files, and every download of one counts against the Git LFS
+      # bandwidth of the owner of the repository. The checkout leaves pointers, and the objects
+      # are cached by the list of their ids, so a run downloads only those that changed since the
+      # cache it restores
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          lfs: true
           persist-credentials: false
+
+      - name: List the Git LFS objects
+        run: git lfs ls-files --long | cut -d ' ' -f1 | sort > .lfs-ids
+
+      - name: Cache the Git LFS objects
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('.lfs-ids') }}
+          restore-keys: lfs-
+
+      # The token of the run, for this command only: the checkout keeps no credentials
+      - name: Pull the Git LFS objects
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          rm .lfs-ids
+          AUTH=$(printf 'x-access-token:%s' "$TOKEN" | base64 | tr -d '\n')
+          git -c "http.$GITHUB_SERVER_URL/.extraheader=AUTHORIZATION: basic $AUTH" lfs pull
 
       - name: Setup pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
@@ -52,6 +74,50 @@ jobs:
 
       - name: Build
         run: pnpm build:release
+
+      # The folders of the platform jobs, kept for a day
+      - name: Upload the build
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: native-build
+          path: |
+            dist
+            !dist/web
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+  ios:
+    name: iOS
+    runs-on: macos-26
+    needs: build
+    timeout-minutes: 20
+    steps:
+      # No Git LFS files: the build job made the output, and the package runs the check
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Download the build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: native-build
+          path: dist
 
       # actool, of Xcode: the runner has it
       - name: Compile
@@ -60,13 +126,13 @@ jobs:
   android:
     name: Android
     runs-on: ubuntu-latest
+    needs: build
     timeout-minutes: 20
     steps:
-      # Fonts and images are Git LFS files
+      # No Git LFS files: the build job made the output, and the package runs the check
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          lfs: true
           persist-credentials: false
 
       - name: Setup pnpm
@@ -83,8 +149,11 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm build:release
+      - name: Download the build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: native-build
+          path: dist
 
       # aapt2, of the Android SDK: the runner has it
       - name: Compile
