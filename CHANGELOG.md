@@ -8,6 +8,24 @@ without an entry is not released.
 The history of the files before 0.1.0 is in the
 [changelog of Chassis Assets](https://github.com/chassis-ui/assets/blob/main/packages/assets/CHANGELOG.md).
 
+## [0.6.0]
+
+The web archives of the `docs` app of both brands change, and the other archives do not. Needs
+`@chassis-ui/assets` 0.12.1 to build.
+
+### Added
+
+- The hero illustrations of the docs sites, in `web/docs/<brand>/images/illustrations/` of
+  `chassis` and `sinefil`: `hero-home.svg`, `hero-tokens.svg`, `hero-css.svg`, `hero-react.svg`,
+  `hero-figma.svg`, `hero-assets.svg` and `hero-icons.svg`. They are of `_default`, so both brands
+  have the same files. `Hero.astro` of `@chassis-ui/docs` 0.15 and later inlines them, and
+  `chassis.checks.json` checks them after a build. No file is removed or renamed.
+
+### Changed
+
+- Built with `@chassis-ui/assets` 0.12.1, which changes no file. CI pulls the Git LFS files once,
+  from a cache, and releases prereleases from `next`.
+
 ## [0.5.1]
 
 The web archive of the `docs` app of `sinefil` changes, and the other archives do not. Needs

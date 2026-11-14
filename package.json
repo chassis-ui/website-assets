@@ -1,6 +1,6 @@
 {
   "name": "@chassis-ui/website-assets",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "description": "The assets of the Chassis websites and apps: the chassis and sinefil brands, the docs and demo apps, built with @chassis-ui/assets",
   "chassis": {
