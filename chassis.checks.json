@@ -72,6 +72,10 @@
         "files": ["images/social-image.png"]
       },
       {
+        "reader": "Hero.astro of @chassis-ui/docs 0.15 and later, which inlines the file and fails the build of a site without it",
+        "files": ["images/illustrations/hero-{home,tokens,css,react,figma,assets,icons}.svg"]
+      },
+      {
         "reader": "the home page of every site, which fails the build of a site without it",
         "files": ["icons/cx-sprite.svg"]
       },
@@ -130,6 +134,10 @@
       {
         "reader": "the social card of sinefil.org",
         "files": ["images/social-image.png"]
+      },
+      {
+        "reader": "Hero.astro of @chassis-ui/docs 0.15 and later, which inlines the file and fails the build of a site without it",
+        "files": ["images/illustrations/hero-{home,tokens,css,react,figma,assets,icons}.svg"]
       }
     ]
   },
